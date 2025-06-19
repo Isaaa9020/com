@@ -12,21 +12,20 @@
                 var firstSheetName = workbook.SheetNames[0];
                 var worksheet = workbook.Sheets[firstSheetName];
 
-                // Convert sheet to JSON to filter blank rows
+                
                 var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+               
                 var filteredData = jsonData.filter(row => row.some(filledCell));
 
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+               
                 var headerRowIndex = filteredData.findIndex((row, index) =>
                   row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
                 );
-                // Fallback
+
                 if (headerRowIndex === -1 || headerRowIndex > 25) {
                   headerRowIndex = 0;
                 }
 
-                // Convert filtered JSON back to CSV
                 var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
                 csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
                 return csv;
@@ -155,7 +154,6 @@
   </style>
 </head>
 <body>
-  <!-- Menú de Navegación -->
   <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
     <div class="container">
       <a class="navbar-brand" href="#">El huesped de Dracula</a>
@@ -177,7 +175,7 @@
     </div>
   </nav>
 
-  <!-- Carrusel Hero -->
+
   <section id="home" class="carousel slide hero-carousel" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -203,7 +201,7 @@
     </button>
   </section>
 
-  <!-- Sección Acerca del Libro -->
+
   <section id="about" class="section">
     <div class="container animate-on-scroll">
       <h2 class="text-center mb-5">Acerca del Libro</h2>
@@ -235,7 +233,7 @@
     </div>
   </section>
   
-  <!-- Sección Autor -->
+
   <section id="author" class="section">
     <div class="container animate-on-scroll">
       <h2 class="text-center mb-5">Sobre el Autor</h2>
@@ -256,7 +254,6 @@
     </div>
   </section>
 
-  <!-- Sección Opiniones -->
   <section id="reviews" class="section">
     <div class="container animate-on-scroll">
       <h2 class="text-center mb-5">Opiniones</h2>
@@ -285,7 +282,6 @@
     </div>
   </section>
 
-  <!-- Sección Conclusión -->
   <section id="conclusion" class="section">
     <div class="container animate-on-scroll">
       <h2 class="text-center mb-5">Conclusión</h2>
@@ -299,14 +295,13 @@
       <div class="row">
        
         <div class="text-center mb-5">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/y1xELdkQOH0?si=b8tG7RvNr2VWJk7D" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe width="500" height="300" src="https://www.youtube.com/embed/y1xELdkQOH0?si=b8tG7RvNr2VWJk7D" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
     </div>
   </section>
 
 
-  <!-- Sección Comprar -->
   <section id="buy" class="section">
     <div class="container animate-on-scroll">
       <h2 class="text-center mb-5">Comprar el Libro</h2>
@@ -317,7 +312,7 @@
     </div>
   </section>
 
-  <!-- Footer -->
+        
   <footer class="text-white text-center py-4">
     <p>© 2025 el huesped de dracula y otros relatos de bram stoker. Todos los derechos reservados a imb-pc.</p>
   </footer>
